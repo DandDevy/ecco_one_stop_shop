@@ -6,6 +6,39 @@
 <body >
 <% include header %>
 <main>
+    <div class="container">
+
+            <div class="jumbotron">
+                <h3>Get financial help</h3>
+                <div class="form-group">
+                    <label for="sel1">Select country:</label>
+                    <select class="form-control" id="countrySelect">
+                        <option>Ireland</option>
+                        <option>France</option>
+                        <option>Germany</option>
+                        <option>Belgium</option>
+                    </select>
+
+                    <br>
+
+                    <label for="sel2">Select renewable energy:</label>
+                    <select class="form-control" id="energySelect">
+                        <option>any</option>
+                        <option>solar</option>
+                        <option>biomass</option>
+                        <option>wind</option>
+                    </select>
+                </div>
+
+                <button type="button" class="btn btn-info" onclick="getFinancialHelp()">Check</button>
+
+                <br>
+                <br>
+                <p id="response"></p>
+
+            </div>
+    </div>
+
 
 </main>
 <%include footer%>
