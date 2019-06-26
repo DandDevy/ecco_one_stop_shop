@@ -1,3 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include util/head %>
+</head>
+<body >
+<% include util/header %>
+<main>
 <h1>ERROR: <%= message %></h1>
 <h2><%= error.status %></h2>
 <pre><%= error.stack %></pre>
+</main>
+<%include util/footer%>
+</body>
+</html>
