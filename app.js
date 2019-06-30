@@ -16,7 +16,7 @@ var financialRouter = require('./routes/financial');
 var registrationRouter = require('./routes/registration');
 const bodyParser = require('body-parser')
 
-const postArr = require("./controllers/postArr.js");
+const postArr = require("./postArr.js");
 var app = express();
 // const router = express.Router();
 

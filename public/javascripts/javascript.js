@@ -46,7 +46,7 @@ $(document).ready(function(){
         };
 
         $.ajax({
-            url: "/controllers/postArr/registration",
+            url: "/postArr/registration",
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(dataToSend),
