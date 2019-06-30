@@ -14,7 +14,7 @@ var financialRouter = require('./routes/financial');
 var registrationRouter = require('./routes/registration');
 const bodyParser = require('body-parser')
 
-const postArr = require("./postArr.js");
+const postArr = require("./controllers/postArr.js");
 var app = express();
 // const router = express.Router();
 
@@ -33,7 +33,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//setting routes
+//adding routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/test', testRouter);
@@ -41,6 +41,7 @@ app.use('/learn', learnRouter);
 app.use('/financial', financialRouter);
 app.use('/registration', registrationRouter);
 
+//adding controllers
 app.use("/postArr", postArr);
 
 // catch 404 and forward to error handler

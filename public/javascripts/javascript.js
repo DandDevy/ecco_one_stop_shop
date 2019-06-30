@@ -28,15 +28,18 @@ $(document).ready(function(){
         const userName = $('#userName').val()
         const pwd = $('#pwd').val()
         const pwdRepeat = $('#pwdRepeat').val()
-        alert("email: " + email + "username: " + userName + " pwd: " + pwd + " pwdRepeat: " + pwdRepeat);
+        // if(safeUserRegistrationData(email,userName,pwd,pwdRepeat)){
+            alert("email: " + email + "username: " + userName + " pwd: " + pwd + " pwdRepeat: " + pwdRepeat);
+        // }
 
         let dataToSend ={
             email: email,
+            userName: userName,
             password: pwd
         };
 
         $.ajax({
-            url: "/postArr/registration",
+            url: "/controllers/postArr/registration",
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(dataToSend),
@@ -54,9 +57,9 @@ $(document).ready(function(){
 
         let safeToCreateUser = false;
 
-        if(pwd === pwdRepeat) {
+        if(pwd == pwdRepeat) {
             if('@' in email){
-                if(pwd.length > 8){
+                if(userName.length > 8){
                     safeToCreateUser = true;
 
                 } else {

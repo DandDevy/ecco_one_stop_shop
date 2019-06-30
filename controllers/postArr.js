@@ -5,7 +5,7 @@ var router = express.Router();
 setTimeout(function(){
     router.post('/registration', (req, res, next)=>{
         // res.send('welcome, ')
-        console.log("req => email:",req.body.email, " and pwd:", req.body.password);
+        console.log("POST: req => email:",req.body.email, ",username:", req.body.userName, "and pwd:", req.body.password);
     })
 
 }, 500);
