@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+//creating routes
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var testRouter = require('./routes/test');
@@ -24,17 +26,14 @@ app.use(logger('dev'));
 app.use(express.json());
 // app.use(bodyParser.json);
 app.use(express.urlencoded({ extended: true }));
-// const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-// app.post('/registration', (req, res, next)=>{
-//   // res.send('welcome, ')
-//   console.log("req =>",req.body.email);
-// })
+
 
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//setting routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/test', testRouter);
@@ -43,12 +42,6 @@ app.use('/financial', financialRouter);
 app.use('/registration', registrationRouter);
 
 app.use("/postArr", postArr);
-
-//post for account registration
-// app.post('/registration', urlencodedParser, function (req, res) {
-//   // res.send('welcome, ')
-//   console.log("req =>",req.body);
-// })
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

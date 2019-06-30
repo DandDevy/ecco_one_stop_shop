@@ -6,11 +6,85 @@
 //     });
 // });
 
+
+$(document).ready(function(){
+
+    /**
+     * Tests the jquery load functionality
+     */
+    $("#btn").click(function () {
+        document.getElementById("test").innerHTML="<p>here iasdsadsads my div</p>";
+        $("#test").load("test.txt", function () {
+            // alert("asd");
+        });
+
+    })
+
+    /**
+     * Post of email and password for registration
+     */
+    $("#registrationSubmitBtn").click(function () {
+        const email = $('#email').val()
+        const userName = $('#userName').val()
+        const pwd = $('#pwd').val()
+        const pwdRepeat = $('#pwdRepeat').val()
+        alert("email: " + email + "username: " + userName + " pwd: " + pwd + " pwdRepeat: " + pwdRepeat);
+
+        let dataToSend ={
+            email: email,
+            password: pwd
+        };
+
+        $.ajax({
+            url: "/postArr/registration",
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(dataToSend),
+            success: (response) => writeResults(response)
+
+        })
+        // $.post("suggestions.php", {
+        //
+        //     email: email,
+        //     password: pwd
+        // })
+    });
+
+    function safeUserRegistrationData(email, userName, pwd, pwdRepeat) {
+
+        let safeToCreateUser = false;
+
+        if(pwd === pwdRepeat) {
+            if('@' in email){
+                if(pwd.length > 8){
+                    safeToCreateUser = true;
+
+                } else {
+                    //warning of too short password
+                }
+            } else {
+                //warning of impossible email
+            }
+
+        } else {
+            // warning of different password
+        }
+
+
+
+        return safeToCreateUser;
+
+    }
+});
+
 function test() {
     console.log("asd")
     // alert("yoasd")
 }
 
+/**
+ * Function for the financial page to select links by country and renewable technology.
+ */
 function getFinancialHelp() {
     let responseText = "";
 
