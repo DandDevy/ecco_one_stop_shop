@@ -6,6 +6,7 @@
 //     });
 // });
 
+const PASSWORD_LENGTH_MIN = 8;
 
 $(document).ready(function(){
 
@@ -14,21 +15,27 @@ $(document).ready(function(){
      */
     $("#btn").click(function () {
         document.getElementById("test").innerHTML="<p>here iasdsadsads my div</p>";
-        $("#test").load("test.txt", function () {
+        $("#test").load("htmlLoads/test.txt", function () {
             // alert("asd");
         });
 
     })
 
     /**
+     * Default bootstrap alert.
+     */
+    $(".registration-response").load("htmlLoads/infoRegistration.txt");
+
+    /**
      * Post of email and password for registration
      */
     $("#registrationSubmitBtn").click(function () {
-        const email = $('#email').val()
-        const userName = $('#userName').val()
-        const pwd = $('#pwd').val()
-        const pwdRepeat = $('#pwdRepeat').val()
+        const email = $('#email').val();
+        const userName = $('#userName').val();
+        const pwd = $('#pwd').val();
+        const pwdRepeat = $('#pwdRepeat').val();
         // if(safeUserRegistrationData(email,userName,pwd,pwdRepeat)){
+        // safeUserRegistrationData(email,userName,pwd,pwdRepeat);
             alert("email: " + email + "username: " + userName + " pwd: " + pwd + " pwdRepeat: " + pwdRepeat);
         // }
 
@@ -45,12 +52,8 @@ $(document).ready(function(){
             data: JSON.stringify(dataToSend),
             success: (response) => writeResults(response)
 
-        })
-        // $.post("suggestions.php", {
-        //
-        //     email: email,
-        //     password: pwd
-        // })
+        });
+        $(".registration-response").load("htmlLoads/successfulRegistration.txt");
     });
 
     function safeUserRegistrationData(email, userName, pwd, pwdRepeat) {
@@ -59,7 +62,7 @@ $(document).ready(function(){
 
         if(pwd == pwdRepeat) {
             if('@' in email){
-                if(userName.length > 8){
+                if(userName.length >= PASSWORD_LENGTH_MIN){
                     safeToCreateUser = true;
 
                 } else {
@@ -71,6 +74,7 @@ $(document).ready(function(){
 
         } else {
             // warning of different password
+            $(".registration-response").load("htmlLoads/differentPasswordDangerWarning.txt");
         }
 
 
