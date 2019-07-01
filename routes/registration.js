@@ -6,13 +6,15 @@ const bodyParser = require('body-parser')
 router.get('/', function(req, res, next) {
     res.render('registration');
 });
-const app = express();
 
+setTimeout(function(){
+    router.post('/registration', (req, res, next)=>{
+        // res.send('welcome, ')
+        console.log("\n\n  POST TO ROUTE: req => email:",req.body.email, ", username:", req.body.userName, " and pwd:", req.body.password,"\n");
+    })
 
-app.post('registration.ejs', (req, res, next)=>{
-    // res.send('welcome, ')
-    console.log("req =>",req.body.email);
-})
+}, 500);
+
 
 
 
