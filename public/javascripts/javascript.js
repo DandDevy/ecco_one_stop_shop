@@ -7,6 +7,8 @@
 // });
 
 const PASSWORD_LENGTH_MIN = 8;
+const USERNAME_LENGTH_MIN = 8;
+let runInfoAlert = true;
 
 $(document).ready(function(){
 
@@ -24,19 +26,37 @@ $(document).ready(function(){
     /**
      * Default bootstrap alert.
      */
-    $(".registration-response").load("htmlLoads/infoRegistration.txt");
+    if(runInfoAlert)
+        $(".registration-response").load("htmlLoads/infoRegistration.txt");
 
     /**
      * Post of email and password for registration
      */
     $("#registrationSubmitBtn").click(function () {
+        runInfoAlert = false;
         const email = $('#email').val();
         const userName = $('#userName').val();
         const pwd = $('#pwd').val();
         const pwdRepeat = $('#pwdRepeat').val();
         // if(safeUserRegistrationData(email,userName,pwd,pwdRepeat)){
         // safeUserRegistrationData(email,userName,pwd,pwdRepeat);
-            alert("email: " + email + "username: " + userName + " pwd: " + pwd + " pwdRepeat: " + pwdRepeat);
+
+        if(pwd !== pwdRepeat){
+            $(".registration-response").load("htmlLoads/differentPasswordDangerWarning.txt");
+
+        } else if(userName.length <= USERNAME_LENGTH_MIN){
+            $(".registration-response").load("htmlLoads/tooShortUserName.txt");
+
+        } else if(!email.includes("@")) {
+            $(".registration-response").load("htmlLoads/notAValidEmail.txt");
+
+        }else if(pwd.length <= USERNAME_LENGTH_MIN){
+            $(".registration-response").load("htmlLoads/tooShortPassword.txt");
+
+        } else {
+            $(".registration-response").load("htmlLoads/successfulRegistration.txt");
+        }
+            // alert("email: " + email + "username: " + userName + " pwd: " + pwd + " pwdRepeat: " + pwdRepeat);
         // }
 
         let dataToSend ={
@@ -46,42 +66,15 @@ $(document).ready(function(){
         };
 
         $.ajax({
-            url: "/postArr/registration",
+            url: "/registration/registration",
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(dataToSend),
             success: (response) => writeResults(response)
 
         });
-        $(".registration-response").load("htmlLoads/successfulRegistration.txt");
     });
 
-    function safeUserRegistrationData(email, userName, pwd, pwdRepeat) {
-
-        let safeToCreateUser = false;
-
-        if(pwd == pwdRepeat) {
-            if('@' in email){
-                if(userName.length >= PASSWORD_LENGTH_MIN){
-                    safeToCreateUser = true;
-
-                } else {
-                    //warning of too short password
-                }
-            } else {
-                //warning of impossible email
-            }
-
-        } else {
-            // warning of different password
-            $(".registration-response").load("htmlLoads/differentPasswordDangerWarning.txt");
-        }
-
-
-
-        return safeToCreateUser;
-
-    }
 });
 
 function test() {
