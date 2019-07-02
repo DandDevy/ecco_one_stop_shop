@@ -11,6 +11,7 @@ setTimeout(function(){
     router.post('/registration', (req, res, next)=>{
         // res.send('welcome, ')
         console.log("\n\n  POST TO ROUTE: req => email:",req.body.email, ", username:", req.body.userName, " and pwd:", req.body.password,"\n");
+        res.render('registrationSuccess');
     })
 
 }, 500);
